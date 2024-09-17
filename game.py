@@ -11,8 +11,8 @@ class NotSpaceInvaders:
         """Define what happens when the game starts, and also create game resources."""
         pygame.init()
 
-        self.screen = pygame.display.set_mode((1920, 1800))
-        pygame.display.set_caption("Definitely NOT Space Invaders")
+        self.screen = pygame.display.set_mode((1600, 1000))
+        pygame.display.set_caption("no officer, this is not a classic arcade game from 1978")
 
     def run_game(self):
         """Here's the loop that contains the functions that runs every frame of our game."""
