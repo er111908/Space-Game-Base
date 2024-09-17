@@ -11,7 +11,7 @@ class NotSpaceInvaders:
         """Define what happens when the game starts, and also create game resources."""
         pygame.init()
 
-        self.screen = pygame.display.set_mode((1200, 800))
+        self.screen = pygame.display.set_mode((1920, 1800))
         pygame.display.set_caption("Definitely NOT Space Invaders")
 
     def run_game(self):
