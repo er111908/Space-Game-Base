@@ -37,7 +37,8 @@ class NotSpaceInvaders:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                    self._check_keydown_events(event, [pygame.K_a, pygame.K_LEFT], self.ship.is_moving_left)
+                    self.ship.is_moving_left = self._check_keydown_events(event, [pygame.K_a, pygame.K_LEFT])
+                    self.ship.is_moving_right = self._check_keydown_events(event, [pygame.K_d, pygame.K_RIGHT])
                 if event.type == pygame.KEYUP:
                     if event.key == pygame.K_a or event.key == pygame.K_LEFT:
                         self.ship.is_moving_right = False
@@ -46,10 +47,7 @@ class NotSpaceInvaders:
         if event.type == pygame.KEYDOWN:
                     key_events = [event.key == key for key in keys]
                     if any(key_events):
-                         action = True
-                    if event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                        action = True
-    
+                         return True
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
