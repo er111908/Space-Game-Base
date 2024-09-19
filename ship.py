@@ -4,7 +4,7 @@ class Ship:
     def __init__(self, game):
         self.screen = game.screen
         self.screen_rect = game.screen.get_rect()
-        self.image = pygame.image.load('assets/my_spaceship_small/png')
+        self.image = pygame.image.load('assets/my_spaceship_small.png')
         self.rect = self.image.get_rect()
 #start new ship at bottom middle screen
         self.rect.midbottom = self.screen_rect.midbottom
