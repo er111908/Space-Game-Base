@@ -45,7 +45,7 @@ class NotSpaceInvaders:
         if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_a or event.key == pygame.K_LEFT:
                         action = True
-    d
+    
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
