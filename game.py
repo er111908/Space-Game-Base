@@ -48,6 +48,10 @@ class NotSpaceInvaders:
                     key_events = [event.key == key for key in keys]
                     if any(key_events):
                          return True
+    def _check_keyup_events(self, event, keys, action):
+         if event.type == pygame.KEYUP:
+                    key_events = [event.key == key for key in keys]
+                    if any
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
