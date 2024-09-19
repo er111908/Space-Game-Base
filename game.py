@@ -23,18 +23,34 @@ class NotSpaceInvaders:
     def run_game(self):
         """Here's the loop that contains the functions that runs every frame of our game."""
         while True:
-            # Watch for mouse and keyboard events (aka interrupts)
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-            
-            # Set the background color
-            self.screen.fill(self.settings.background_color)
-            self.ship.blitme()
-
-            # Make the most-recently-drawn scene visible (Draw frame to screen)
-            pygame.display.flip()
+            self._check_events()
+            self._draw_frame()
+            self.ship.move()
             self.clock.tick(60)
+
+    def _draw_frame(self):
+        self.screen.fill(self.settings.background_color)
+        self.ship.blitme()
+        # Make the most-recently-drawn scene visible (Draw frame to screen)
+        pygame.display.flip()
+
+    def _check_events(self):
+        """Respond to keypresses and mouse events"""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            self.ship.is_moving_left = self._check_keydown_events(event, [pygame.K_a, pygame.K_LEFT])
+            self.ship.is_moving_right = self._check_keydown_events(event, [pygame.K_d, pygame.K_RIGHT])
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                    self.ship.is_moving_left = False
+
+    def _check_keydown_events(self, event, keys):
+        if event.type == pygame.KEYDOWN:
+            key_events = [event.key == key for key in keys]
+            print(key_events)
+            if any(key_events):
+                return True
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
