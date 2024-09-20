@@ -48,9 +48,9 @@ class NotSpaceInvaders:
             if any(key_events):
                 return True
     def _check_keyup_events(self, event, keys):
-         if event.type == pygame.KEYUP:
-           key_events = [event.key == key for key in keys]
-           if any(key_events):
+        if event.type == pygame.KEYUP:
+            key_events = [event.key == key for key in keys]
+            if any(key_events):
                return True
 
 if __name__ == '__main__':
