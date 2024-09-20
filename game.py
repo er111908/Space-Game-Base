@@ -13,7 +13,6 @@ class NotSpaceInvaders:
         """Define what happens when the game starts, and also create game resources."""
         pygame.init()
         self.settings = Settings()
-        
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("no officer, this is not a classic arcade game from 1978")
         self.ship = Ship(self)
@@ -34,14 +33,14 @@ class NotSpaceInvaders:
         pygame.display.flip()
 
     def _check_events(self):
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    sys.exit()
-                self.ship.is_moving_left = self._check_keydown_events(event, [pygame.K_a, pygame.K_LEFT])
-                self.ship.is_moving_right = self._check_keydown_events(event, [pygame.K_d, pygame.K_RIGHT])
-                if event.type == pygame.KEYUP:
-                    if event.key == pygame.K_a or event.key == pygame.K_LEFT:
-                        self.ship.is_moving_left = False
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
+            self.ship.is_moving_left = self._check_keydown_events(event, [pygame.K_a, pygame.K_LEFT])
+            self.ship.is_moving_right = self._check_keydown_events(event, [pygame.K_d, pygame.K_RIGHT])
+            if event.type == pygame.KEYUP:
+                if event.key == pygame.K_a or event.key == pygame.K_LEFT:
+                    self.ship.is_moving_left = False
 
     def _check_keydown_events(self, event, keys):
         if event.type == pygame.KEYDOWN:
