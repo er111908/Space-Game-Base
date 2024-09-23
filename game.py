@@ -50,13 +50,13 @@ class NotSpaceInvaders:
             if self._check_keydown_events(event, self.settings.fire_bullet_keybinding):
                 self._fire_bullet()
 
-    def _check_keydown_events(event, keybinding):
+    def _check_keydown_events(self, event, keybinding):
         if event.type == pygame.KEYDOWN:
             key_events = [event.key == key for key in keybinding.keys]
             if any(key_events):
                 return True
             
-    def _check_keyup_events(event, keybinding):
+    def _check_keyup_events(self, event, keybinding):
         if event.type == pygame.KEYUP:
             key_events = [event.key == key for key in keybinding.keys]
             if any(key_events):
