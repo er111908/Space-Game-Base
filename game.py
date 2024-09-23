@@ -3,6 +3,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 class NotSpaceInvaders:
     """Totally *not* a reskinned version of Space Invaders.
@@ -17,7 +18,7 @@ class NotSpaceInvaders:
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Definitely NOT Space Invaders")
         self.ship = Ship(self)
-
+        self.bullets = pygame.sprite.Group()
         self.clock = pygame.time.Clock()
 
     def run_game(self):
@@ -26,11 +27,14 @@ class NotSpaceInvaders:
             self._check_events()
             self._draw_frame()
             self.ship.move()
+            self.bullets.update()
             self.clock.tick(60)
 
     def _draw_frame(self):
         self.screen.fill(self.settings.background_color)
         self.ship.blitme()
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
         # Make the most-recently-drawn scene visible (Draw frame to screen)
         pygame.display.flip()
 
@@ -55,6 +59,10 @@ class NotSpaceInvaders:
             key_events = [event.key == key for key in keybinding.keys]
             if any(key_events):
                 return False
+            
+    def _fire_bullet(self):
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
