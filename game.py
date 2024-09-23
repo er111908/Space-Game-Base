@@ -14,7 +14,6 @@ class NotSpaceInvaders:
         """Define what happens when the game starts, and also create game resources."""
         pygame.init()
         self.settings = Settings()
-
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Definitely NOT Space Invaders")
         self.ship = Ship(self)
