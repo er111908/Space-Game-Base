@@ -11,6 +11,7 @@ class Settings:
         # Keybindings
         self.move_left_keybinding = Keybinding([pygame.K_a, pygame.K_LEFT])
         self.move_right_keybinding = Keybinding([pygame.K_d, pygame.K_RIGHT])
+        self.fire_bullet_keybinding = Keybinding([pygame.K_SPACE])
 
         # Bullet Settings
         self.bullet_speed = 2.0
