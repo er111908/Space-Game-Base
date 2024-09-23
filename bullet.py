@@ -16,4 +16,4 @@ class Bullet(Sprite):
         self.speed = self.settings.bullet_speed
 
         self.rect = pygame.Rect(0, 0, self.width, self.height)
-        
+        self.rect.midtop = game.ship.rect.midtop
