@@ -1,4 +1,5 @@
 from keybinding import Keybinding
+from ship import Ship
 import pygame
 
 class Settings:
