@@ -18,10 +18,12 @@ class Ship:
         self.is_moving_left = False
         self.is_moving_right = False
 
-    def move(self):
+    def update(self):
         if self.is_moving_left:
+            print("moving left")
             self.rect.x -= 1
         if self.is_moving_right:
+            print("moving right")
             self.rect.x += 1
 
     def blitme(self):

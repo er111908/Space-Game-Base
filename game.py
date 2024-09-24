@@ -19,7 +19,6 @@ class NotSpaceInvaders:
         pygame.display.set_caption("Definitely NOT Space Invaders")
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
-
         self.clock = pygame.time.Clock()
 
     def run_game(self):
@@ -27,8 +26,8 @@ class NotSpaceInvaders:
         while True:
             self._check_events()
             self._draw_frame()
-            self.ship.move()
             self.bullets.update()
+            self.ship.update()
             self.clock.tick(60)
 
     def _draw_frame(self):
@@ -44,24 +43,37 @@ class NotSpaceInvaders:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            self.ship.is_moving_left = self._check_keydown_events(event, self.settings.move_left_keybinding)
-            self.ship.is_moving_right = self._check_keydown_events(event, self.settings.move_right_keybinding)
-            self.ship.is_moving_left = self._check_keyup_events(event, self.settings.move_left_keybinding)
-            self.ship.is_moving_right = self._check_keyup_events(event, self.settings.move_right_keybinding)
+            print("Is ship moving?" + str(self.ship.is_moving_left))
+            print("Is ship moving?" + str(self.ship.is_moving_right))
+            
+            # Keydown Events
+            if self._check_keydown_events(event, self.settings.move_left_keybinding):
+                self.ship.is_moving_left = True
+            elif self._check_keydown_events(event, self.settings.move_right_keybinding):
+                self.ship.is_moving_right = True
+            
             if self._check_keydown_events(event, self.settings.fire_bullet_keybinding):
                 self._fire_bullet()
+
+            # Keyup Events
+            if self._check_keyup_events(event, self.settings.move_left_keybinding):
+                self.ship.is_moving_left = False
+            if self._check_keyup_events(event, self.settings.move_right_keybinding):
+                self.ship.is_moving_right = False
 
     def _check_keydown_events(self, event, keybinding):
         if event.type == pygame.KEYDOWN:
             key_events = [event.key == key for key in keybinding.keys]
             if any(key_events):
+                print("Key pressed: " + str(event.key))
                 return True
             
     def _check_keyup_events(self, event, keybinding):
         if event.type == pygame.KEYUP:
             key_events = [event.key == key for key in keybinding.keys]
             if any(key_events):
-                return False
+                print("Key depressed: " + str(event.key))
+                return True
             
     def _fire_bullet(self):
         """Create a new bullet and add it to our group of bullet sprites"""
