@@ -14,10 +14,12 @@ class NotSpaceInvaders:
         """Define what happens when the game starts, and also create game resources."""
         pygame.init()
         self.settings = Settings()
+
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Definitely NOT Space Invaders")
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
+
         self.clock = pygame.time.Clock()
 
     def run_game(self):
@@ -62,6 +64,7 @@ class NotSpaceInvaders:
                 return False
             
     def _fire_bullet(self):
+        """Create a new bullet and add it to our group of bullet sprites"""
         new_bullet = Bullet(self)
         self.bullets.add(new_bullet)
 
