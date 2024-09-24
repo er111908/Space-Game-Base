@@ -19,7 +19,6 @@ class NotSpaceInvaders:
         pygame.display.set_caption("Definitely NOT Space Invaders")
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
-
         self.clock = pygame.time.Clock()
 
     def run_game(self):
