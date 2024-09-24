@@ -1,5 +1,4 @@
 import pygame
-from bullet import Bullet
 
 class Ship:
     """A class to manage the ship"""

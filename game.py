@@ -4,7 +4,6 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
-from keybinding import Keybinding
 
 class NotSpaceInvaders:
     """Totally *not* a reskinned version of Space Invaders.
@@ -56,12 +55,14 @@ class NotSpaceInvaders:
         if event.type == pygame.KEYDOWN:
             key_events = [event.key == key for key in keybinding.keys]
             if any(key_events):
+                print("key pressed: " + event.key)
                 return True
             
     def _check_keyup_events(self, event, keybinding):
         if event.type == pygame.KEYUP:
             key_events = [event.key == key for key in keybinding.keys]
             if any(key_events):
+                print("key unpressed: " + event.key)
                 return False
             
     def _fire_bullet(self):
