@@ -27,8 +27,8 @@ class NotSpaceInvaders:
         while True:
             self._check_events()
             self._draw_frame()
-            self.ship.move()
             self.bullets.update()
+            self.ship.update()
             self.clock.tick(60)
 
     def _draw_frame(self):
