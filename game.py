@@ -4,6 +4,7 @@ import pygame
 from settings import Settings
 from ship import Ship
 from bullet import Bullet
+from keybinding import Keybinding
 
 class NotSpaceInvaders:
     """Totally *not* a reskinned version of Space Invaders.
