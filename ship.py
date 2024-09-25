@@ -24,7 +24,7 @@ class Ship:
         if self.is_moving_right:
             self.rect.x += 1
         if self.is_firing_bullet:
-            self._fire_bullet(self)
+            self.game._fire_bullet()
 
     def blitme(self):
         """Draw the ship at the current location"""
