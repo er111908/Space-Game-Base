@@ -20,8 +20,10 @@ class Ship:
 
     def update(self):
         if self.is_moving_left:
+            print("moving left")
             self.rect.x -= 1
         if self.is_moving_right:
+            print("moving right")
             self.rect.x += 1
 
     def blitme(self):
