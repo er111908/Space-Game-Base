@@ -17,12 +17,15 @@ class Ship:
 
         self.is_moving_left = False
         self.is_moving_right = False
+        self.is_firing_bullet = False
 
     def update(self):
         if self.is_moving_left:
             self.rect.x -= 1
         if self.is_moving_right:
             self.rect.x += 1
+        if self.is_firing_bullet:
+            self.game._fire_bullet()
 
     def blitme(self):
         """Draw the ship at the current location"""
