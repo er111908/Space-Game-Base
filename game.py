@@ -51,7 +51,7 @@ class NotSpaceInvaders:
                 self.ship.is_moving_right = True
             
             if self._check_keydown_events(event, self.settings.fire_bullet_keybinding):
-                self._fire_bullet = True
+                self.is_firing_bullet = True
 
             # Keyup Events
             if self._check_keyup_events(event, self.settings.move_left_keybinding):
@@ -59,7 +59,7 @@ class NotSpaceInvaders:
             if self._check_keyup_events(event, self.settings.move_right_keybinding):
                 self.ship.is_moving_right = False
             if self._check_keyup_events(event, self.settings.fire_bullet_keybinding):
-                self._fire_bullet = False
+                self.is_firing_bullet = False
 
     def _check_keydown_events(self, event, keybinding):
         if event.type == pygame.KEYDOWN:
