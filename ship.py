@@ -1,4 +1,5 @@
 import pygame
+from game import NotSpaceInvaders
 class Ship:
     """A class to manage the ship"""
     
