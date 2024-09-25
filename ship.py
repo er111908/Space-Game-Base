@@ -22,15 +22,15 @@ class Ship:
 
     def update(self):
         if self.is_moving_left:
-            print("moving left")
+            #print("moving left")
             self.rect.x -= 1
         if self.is_moving_right:
-            print("moving right")
+            #print("moving right")
             self.rect.x += 1
         if self.is_firing_bullet:
             print(self.game.clock)
             #if pygame.time.get_ticks() % (self.game.settings.max_fps // self.game.settings.bullet_fire_rate) == 0:
-            self.game._fire_bullet()
+            pygame.key.set_repeat(1000 // self.game.settings.bullet_fire_rate, 0)
 
     def blitme(self):
         """Draw the ship at the current location"""

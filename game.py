@@ -43,8 +43,8 @@ class NotSpaceInvaders:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
-            print("Is ship moving?" + str(self.ship.is_moving_left))
-            print("Is ship moving?" + str(self.ship.is_moving_right))
+            #print("Is ship moving?" + str(self.ship.is_moving_left))
+            #print("Is ship moving?" + str(self.ship.is_moving_right))
             
             # Keydown Events
             if self._check_keydown_events(event, self.settings.move_left_keybinding):
@@ -54,6 +54,7 @@ class NotSpaceInvaders:
                 self.ship.is_moving_right = True
             
             if self._check_keydown_events(event, self.settings.fire_bullet_keybinding):
+                self._fire_bullet()
                 self.ship.is_firing_bullet = True
 
             # Keyup Events
