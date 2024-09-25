@@ -1,5 +1,4 @@
 import pygame
-from game import NotSpaceInvaders
 class Ship:
     """A class to manage the ship"""
     
@@ -25,7 +24,8 @@ class Ship:
         if self.is_moving_right:
             self.rect.x += 1
         if self.is_firing_bullet:
-            self.game._fire_bullet()
+            if pygame.time.get_ticks() % (self.game.settings.max_fps // self.game.settings.bullet_fire_rate) == 0:
+                self.game._fire_bullet()
 
     def blitme(self):
         """Draw the ship at the current location"""
