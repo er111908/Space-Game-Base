@@ -8,6 +8,7 @@ class Ship:
 
         self.screen = game.screen
         self.screen_rect = game.screen.get_rect()
+        self.game = game
 
         self.image = pygame.image.load('assets/my_spaceship_small.png')
         self.rect = self.image.get_rect()
@@ -17,6 +18,7 @@ class Ship:
 
         self.is_moving_left = False
         self.is_moving_right = False
+        self.is_firing_bullet = False
 
     def update(self):
         if self.is_moving_left:
@@ -25,6 +27,10 @@ class Ship:
         if self.is_moving_right:
             print("moving right")
             self.rect.x += 1
+        if self.is_firing_bullet:
+            print(self.game.clock)
+            #if pygame.time.get_ticks() % (self.game.settings.max_fps // self.game.settings.bullet_fire_rate) == 0:
+            self.game._fire_bullet()
 
     def blitme(self):
         """Draw the ship at the current location"""

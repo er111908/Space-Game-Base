@@ -7,6 +7,7 @@ class Settings:
         self.screen_width = 1000
         self.screen_height = 600
         self.background_color = (18, 2, 31)
+        self.max_fps = 60
 
         # Keybindings
         self.move_left_keybinding = Keybinding([pygame.K_a, pygame.K_LEFT])
@@ -14,6 +15,7 @@ class Settings:
         self.fire_bullet_keybinding = Keybinding([pygame.K_SPACE])
 
         # Bullet Settings
+        self.bullet_fire_rate = 2 # per second
         self.bullet_speed = 2.0
         self.bullet_width = 3
         self.bullet_height = 10
