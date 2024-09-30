@@ -16,7 +16,7 @@ class Settings:
 
         # Bullet Settings
         self.bullet_fire_rate = 2 # per second
-        self.bullet_speed = 4.0
+        self.bullet_speed = 2.0
         self.bullet_width = 3
         self.bullet_height = 10
         self.bullet_color = (150, 150, 150)
