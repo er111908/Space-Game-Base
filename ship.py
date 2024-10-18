@@ -10,7 +10,7 @@ class Ship:
         self.screen_rect = game.screen.get_rect()
         self.game = game
 
-        self.image = pygame.image.load('assets/cat3.png')
+        self.image = pygame.image.load('assets/dog_ship.png')
         self.rect = self.image.get_rect()
 
         # Start each new ship at the bottom middle of screen

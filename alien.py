@@ -10,7 +10,7 @@ class Alien:
         self.screen_rect = game.screen.get_rect()
         self.game = game
 
-        self.image = pygame.image.load('assets/dog3.png')
+        self.image = pygame.image.load('assets/cheese_spaceship.png')
         self.rect = self.image.get_rect()
 
         self.rect.topleft = self.screen_rect.topleft
