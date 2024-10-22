@@ -17,7 +17,7 @@ class NotSpaceInvaders:
         self.settings = Settings()
 
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
-        pygame.display.set_caption("Definitely NOT Space Invaders")
+        pygame.display.set_caption("cheese")
         pygame.mixer.init()
         self.ship = Ship(self)
         self.alien = Alien(self)
