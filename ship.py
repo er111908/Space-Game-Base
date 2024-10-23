@@ -11,6 +11,7 @@ class Ship:
         self.game = game
 
         self.image = pygame.image.load('assets/cat4.png')
+        self.image = pygame.transform.scale(self.image, (self.rect.width * .3, self.rect.height * .3))
         self.rect = self.image.get_rect()
 
         # Start each new ship at the bottom middle of screen

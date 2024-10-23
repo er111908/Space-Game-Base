@@ -12,7 +12,7 @@ class Alien:
 
         self.image = pygame.image.load('assets/dog3.png')
         self.rect = self.image.get_rect()
-
+        self.image = pygame.transform.scale(self.image, (self.rect.width * .3, self.rect.height * .3))
         self.rect.topleft = self.screen_rect.topleft
 
     def update(self):
