@@ -18,13 +18,13 @@ class NotSpaceInvaders:
 
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("cheese")
-        #pygame.mixer.init()
+        pygame.mixer.init()
         self.ship = Ship(self)
         self.alien = Alien(self)
         self.bullets = pygame.sprite.Group()
         self.clock = pygame.time.Clock()
         self.BULLET_EVENT = pygame.USEREVENT + 1
-        #self.cheese_sound = pygame.mixer.Sound("assets/henry_cheese.mp3")
+        self.cheese_sound = pygame.mixer.Sound("assets/catbark.mp3")
 
     def run_game(self):
         """Here's the loop that contains the functions that runs every frame of our game."""
