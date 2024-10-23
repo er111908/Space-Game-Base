@@ -94,8 +94,8 @@ class NotSpaceInvaders:
         new_bullet = Bullet(self)
         new_bullet.image = pygame.transform.scale(new_bullet.image, (new_bullet.rect.width * .3, new_bullet.rect.height * .3))
         self.bullets.add(new_bullet)
-        #self.cheese_sound.stop()
-        #self.cheese_sound.play()
+        self.cheese_sound.stop()
+        self.cheese_sound.play()
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
