@@ -16,7 +16,7 @@ class Bullet(Sprite):
         #self.height = self.settings.bullet_height
         self.speed = self.settings.bullet_speed
 
-        self.image = pygame.image.load("assets/catattack.jpg")
+        self.image = pygame.image.load("assets/catattack2.png")
         self.rect = self.image.get_rect()
         self.image = pygame.transform.scale(self.image, (self.rect.width * .5, self.rect.height * .5))
         self.rect = self.image.get_rect()
