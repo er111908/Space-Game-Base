@@ -11,7 +11,7 @@ class Ship:
         self.game = game
 
         self.image = pygame.image.load('assets/cat4.png')
-
+        self.rect = self.image.get_rect()
         # Start each new ship at the bottom middle of screen
         self.rect.midbottom = self.screen_rect.midbottom
 
