@@ -13,12 +13,12 @@ class Ship:
         self.image = pygame.image.load('assets/cat4.png')
         self.rect = self.image.get_rect()
         # Start each new ship at the bottom middle of screen
-        self.rect.midbottom = self.screen_rect.midbottom
-
+        
         self.is_moving_left = False
         self.is_moving_right = False
-        pygame.transform.scale(self.image, (self.rect.width * .5, self.rect.height * .5))
+        self.image = pygame.transform.scale(self.image, (self.rect.width * .15, self.rect.height * .15))
         self.rect = self.image.get_rect()
+        self.rect.midbottom = self.screen_rect.midbottom
 
     def update(self):
         if self.is_moving_left and self.rect.left > self.screen_rect.left:
