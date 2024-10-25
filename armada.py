@@ -18,7 +18,5 @@ class Armada:
         self.aliens = {i: Alien() for i in range(0, self.columns * self.rows)}
         column_index = 0
         for alien in self.aliens:
-            for j in range(0, self.rows):
-                column_index += 1
-                if column_index > self.columns:
-                    
+            for column_index in range(0, self.columns):
+                for
