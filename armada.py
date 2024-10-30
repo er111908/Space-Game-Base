@@ -25,20 +25,22 @@ class Armada:
                 alien_x = column_index * (self.reference_alien.rect.width + self.column_gutter)
                 alien_y = row_index * (self.reference_alien.rect.height + self.row_gutter)
                 alien_offset = (self.rect.topleft[0] + alien_x, self.rect.topleft[1] + alien_y)
-                self.aliens[alien_index].rect .topleft = self.rect.topleft
+                self.aliens[alien_index].rect.topleft = alien_offset
                 alien_index += 1
     def blitme(self):
         for alien in self.aliens.values():
             alien.blitme()
     def update(self):
+        if self.moving_right:
+            self.rect.x += self.speed
+            if self.rect.right > self.screen_rect.right:
+                self.moving_right = False
+        else:
+            self.rect.x -= self.speed
+            if self.rect.left < self.screen_rect.left:
+                self.moving_right = True
         for alien in self.aliens.values():
             if self.moving_right:
                 alien.rect.x += self.speed
-                self.rect.x += self.speed
-                if self.rect.right > self.screen_rect.right:
-                    self.moving_right = False
             else:
-                alien.rect.x -= self.speed
-                self.rect.x -= self.speed
-                if self.rect.left < self.screen_rect.left:
-                    self.moving_right = True
+                alien.rect.x -=self.speed
