@@ -101,6 +101,12 @@ class NotSpaceInvaders:
         self.cheese_sound.stop()
         self.cheese_sound.play()
 
+    def _check_hitboxes(self):
+        for bullet in self.bullets.sprites():
+            collision = bullet.rect.collidedict(self.armada.aliens)
+            if collision:
+                .
+
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
     nsi = NotSpaceInvaders()
