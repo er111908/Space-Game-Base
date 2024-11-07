@@ -33,6 +33,7 @@ class NotSpaceInvaders:
         """Here's the loop that contains the functions that runs every frame of our game."""
         while True:
             self._check_events()
+            self._check_hitboxes()
             self._draw_frame()
             self.bullets.update()
             self.ship.update()
@@ -103,9 +104,9 @@ class NotSpaceInvaders:
 
     def _check_hitboxes(self):
         for bullet in self.bullets.sprites():
-            collision = bullet.rect.collidedict(self.armada.aliens)
-            if collision:
-                .
+            collisions = bullet.rect.collidedict(self.armada.aliens, 1)
+            if collisions:
+                del self.armada[collisions[0][0]]
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
