@@ -106,7 +106,8 @@ class NotSpaceInvaders:
         for bullet in self.bullets.sprites():
             collisions = bullet.rect.collidedict(self.armada.aliens, 1)
             if collisions:
-                del self.armada[collisions[0][0]]
+                del self.armada.aliens[collisions[0][0]]
+                bullet.kill()
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
