@@ -104,9 +104,9 @@ class NotSpaceInvaders:
 
     def _check_hitboxes(self):
         for bullet in self.bullets.sprites():
-            collisions = bullet.rect.collidedictall(self.armada.aliens, 1)
+            collisions = bullet.rect.collidedict(self.armada.aliens, 1)
             if collisions:
-                del self.armada.aliens[collisions[0][0]]
+                del self.armada.aliens[collisions[0]]
                 bullet.kill()
 
 if __name__ == '__main__':
