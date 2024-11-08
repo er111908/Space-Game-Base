@@ -27,6 +27,7 @@ class NotSpaceInvaders:
         self.BULLET_EVENT = pygame.USEREVENT + 1
         self.cheese_sound = pygame.mixer.Sound("assets/catbark.mp3")
         self.background_music = pygame.mixer.Sound("assets/csgo.mp3")
+        self.dogbark = pygame.mixer.Sound("assets/dogbark.mp3")
         self.background_music.play()
 
     def run_game(self):
@@ -108,6 +109,7 @@ class NotSpaceInvaders:
             if collisions:
                 del self.armada.aliens[collisions[0]]
                 bullet.kill()
+                self.dogbark.play()
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
