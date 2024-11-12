@@ -113,6 +113,7 @@ class NotSpaceInvaders:
             if collisions:
                 del self.armada.aliens[collisions[0]]
                 bullet.kill()
+                self.dogbark.stop()
                 self.dogbark.play()
 
 if __name__ == '__main__':
