@@ -3,7 +3,7 @@ import sys
 import pygame
 from settings import Settings
 from ship import Ship
-from bullet import Bullet
+from bullet import Bullet, EnemyBullet
 from alien import Alien
 from armada import Armada
 
@@ -102,6 +102,10 @@ class NotSpaceInvaders:
         self.bullets.add(new_bullet)
         self.cheese_sound.stop()
         self.cheese_sound.play()
+
+    def _fire_enemy_bullet(self, alien):
+        new_bullet = EnemyBullet(self, alien)
+        self.bullets.add(new_bullet)
 
     def _check_hitboxes(self):
         for bullet in self.bullets.sprites():

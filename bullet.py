@@ -32,4 +32,14 @@ class Bullet(Sprite):
 
     def draw_bullet(self):
         self.screen.blit(self.image, self.rect)
-        
+
+class EnemyBullet(Bullet):
+    def __init__(self, game, alien):
+        super().__init__(game)
+        self.image = pygame.image.load("assets/dogattacked.png")
+        self.rect = self.image.get_rect()
+        self.rect.midbottom = alien.rect.midbottom
+    def update(self):
+        self.rect.y += self.speed
+        if self.rect.top > self.screen_rect.bottom:
+            self.kill()
