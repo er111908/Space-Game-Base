@@ -106,6 +106,8 @@ class NotSpaceInvaders:
     def _fire_enemy_bullet(self, alien):
         new_bullet = EnemyBullet(self, alien)
         self.bullets.add(new_bullet)
+        self.dogbark.stop()
+        self.dogbark.play()
 
     def _check_hitboxes(self):
         for bullet in self.bullets.sprites():
@@ -113,8 +115,6 @@ class NotSpaceInvaders:
             if collisions:
                 del self.armada.aliens[collisions[0]]
                 bullet.kill()
-                self.dogbark.stop()
-                self.dogbark.play()
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
