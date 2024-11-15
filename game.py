@@ -6,6 +6,7 @@ from ship import Ship
 from bullet import Bullet, EnemyBullet
 from alien import Alien
 from armada import Armada
+import random
 
 class NotSpaceInvaders:
     """Totally *not* a reskinned version of Space Invaders.
@@ -25,10 +26,12 @@ class NotSpaceInvaders:
         self.bullets = pygame.sprite.Group()
         self.clock = pygame.time.Clock()
         self.BULLET_EVENT = pygame.USEREVENT + 1
+        self.ENEMY_BULLET_EVENT = self.BULLET_EVENT + 1
         self.cheese_sound = pygame.mixer.Sound("assets/catbark.mp3")
         self.background_music = pygame.mixer.Sound("assets/csgo.mp3")
         self.dogbark = pygame.mixer.Sound("assets/dogbark.mp3")
         self.background_music.play()
+        pygame.time.set_timer(self.ENEMY_BULLET_EVENT, 500)
 
     def run_game(self):
         """Here's the loop that contains the functions that runs every frame of our game."""
@@ -81,6 +84,9 @@ class NotSpaceInvaders:
             if event.type == self.BULLET_EVENT:
                 self._fire_bullet()
 
+            if event.type == self.ENEMY_BULLET_EVENT:
+                self._fire_enemy_bullet()
+
     def _check_keydown_events(self, event, keybinding):
         if event.type == pygame.KEYDOWN:
             key_events = [event.key == key for key in keybinding.keys]
@@ -104,6 +110,8 @@ class NotSpaceInvaders:
         self.cheese_sound.play()
 
     def _fire_enemy_bullet(self, alien):
+        random.index = random.randint(0, len(self.armada.aliens) - 1)
+        _, alien = list(self.armada.aliens.items())[random_index]
         new_bullet = EnemyBullet(self, alien)
         self.bullets.add(new_bullet)
         self.dogbark.stop()
@@ -111,10 +119,11 @@ class NotSpaceInvaders:
 
     def _check_hitboxes(self):
         for bullet in self.bullets.sprites():
-            collisions = bullet.rect.collidedict(self.armada.aliens, 1)
-            if collisions:
-                del self.armada.aliens[collisions[0]]
-                bullet.kill()
+            if type(bullet) is type(Bullet):
+                collisions = bullet.rect.collidedict(self.armada.aliens, 1)
+                if collisions:
+                    del self.armada.aliens[collisions[0]]
+                    bullet.kill()
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.

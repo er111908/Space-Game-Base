@@ -37,6 +37,7 @@ class EnemyBullet(Bullet):
     def __init__(self, game, alien):
         super().__init__(game)
         self.image = pygame.image.load("assets/dogattacked.png")
+        self.image = pygame.transform.scale(self.image, (self.rect.width * .5, self.rect.height * .5))
         self.rect = self.image.get_rect()
         self.rect.midbottom = alien.rect.midbottom
     def update(self):
