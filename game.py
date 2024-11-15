@@ -85,7 +85,7 @@ class NotSpaceInvaders:
                 self._fire_bullet()
 
             if event.type == self.ENEMY_BULLET_EVENT:
-                self._fire_enemy_bullet()
+                self._fire_enemy_bullet(Alien)
 
     def _check_keydown_events(self, event, keybinding):
         if event.type == pygame.KEYDOWN:
@@ -110,7 +110,7 @@ class NotSpaceInvaders:
         self.cheese_sound.play()
 
     def _fire_enemy_bullet(self, alien):
-        random.index = random.randint(0, len(self.armada.aliens) - 1)
+        random_index = random.randint(0, len(self.armada.aliens) - 1)
         _, alien = list(self.armada.aliens.items())[random_index]
         new_bullet = EnemyBullet(self, alien)
         self.bullets.add(new_bullet)
@@ -119,7 +119,7 @@ class NotSpaceInvaders:
 
     def _check_hitboxes(self):
         for bullet in self.bullets.sprites():
-            if type(bullet) is type(Bullet):
+            if type(bullet) == Bullet:
                 collisions = bullet.rect.collidedict(self.armada.aliens, 1)
                 if collisions:
                     del self.armada.aliens[collisions[0]]
