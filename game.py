@@ -32,6 +32,8 @@ class NotSpaceInvaders:
         self.dogbark = pygame.mixer.Sound("assets/dogbark.mp3")
         self.background_music.play()
         pygame.time.set_timer(self.ENEMY_BULLET_EVENT, 500)
+        self.LOSE_EVENT = pygame.ENEMY_BULLET_EVENT + 1
+        self.WIN_EVENT = self.LOSE_EVENT + 1
 
     def run_game(self):
         """Here's the loop that contains the functions that runs every frame of our game."""
@@ -124,6 +126,11 @@ class NotSpaceInvaders:
                 if collisions:
                     del self.armada.aliens[collisions[0]]
                     bullet.kill()
+            if type(bullet) == EnemyBullet:
+                collision = bullet.rect.colliderect(self.ship.rect)
+                if collision:
+                    self.ship.lives -= 1
+                    .
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.

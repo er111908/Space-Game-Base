@@ -9,6 +9,8 @@ class Ship:
         self.screen = game.screen
         self.screen_rect = game.screen.get_rect()
         self.game = game
+        self.lives = 5
+        self.just_died = False
 
         self.image = pygame.image.load('assets/cat4.png')
         self.rect = self.image.get_rect()
@@ -25,6 +27,9 @@ class Ship:
             self.rect.x -= self.game.settings.ship_speed
         if self.is_moving_right and self.rect.right < self.screen_rect.right:
             self.rect.x += self.game.settings.ship_speed
+            if self.lives < 1:
+                self.lives = 5
+                self.just_died = True
 
     def blitme(self):
         """Draw the ship at the current location"""
