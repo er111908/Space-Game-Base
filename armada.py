@@ -6,6 +6,7 @@ class Armada:
         self.columns = 5
         self.speed = 2
         self.moving_right = True
+        self.game = game
         self.aliens = {}
         self.screen = game.screen
         self.screen_rect = self.screen.get_rect()
@@ -44,3 +45,8 @@ class Armada:
                 alien.rect.x += self.speed
             else:
                 alien.rect.x -=self.speed
+
+    def kill_alien(self, alien_index):
+        del self.aliens[alien_index]
+        if len(self.aliens) <= 0:
+            pygame.event.post(self.game.WIN_EVENT)

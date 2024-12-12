@@ -6,6 +6,7 @@ from ship import Ship
 from bullet import Bullet, EnemyBullet
 from alien import Alien
 from armada import Armada
+from message import Message
 import random
 
 class NotSpaceInvaders:
@@ -16,24 +17,28 @@ class NotSpaceInvaders:
     def __init__(self):
         """Define what happens when the game starts, and also create game resources."""
         pygame.init()
+        pygame.mixer.init()
         self.settings = Settings()
-
         self.screen = pygame.display.set_mode((self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("cat vs dog")
-        pygame.mixer.init()
+        self.message = Message(self)
         self.ship = Ship(self)
         self.armada = Armada(self)
         self.bullets = pygame.sprite.Group()
         self.clock = pygame.time.Clock()
+        #
         self.BULLET_EVENT = pygame.USEREVENT + 1
-        self.ENEMY_BULLET_EVENT = self.BULLET_EVENT + 1
+        self.ENEMY_BULLET_EVENT = pygame.USEREVENT + 2
+        self.LEVEL_EVENT = pygame.USEREVENT + 3
+        self.WIN_EVENT = pygame.event.Event(self.LEVEL_EVENT, {'outcome': 'win'})
+        self.LOSE_EVENT = pygame.event.Event(self.LEVEL_EVENT, {'outcome': 'lose'})
+        self.MESSAGE_TIMEOUT_EVENT = pygame.USEREVENT + 4
+        #
         self.cheese_sound = pygame.mixer.Sound("assets/catbark.mp3")
         self.background_music = pygame.mixer.Sound("assets/csgo.mp3")
         self.dogbark = pygame.mixer.Sound("assets/dogbark.mp3")
         self.background_music.play()
         pygame.time.set_timer(self.ENEMY_BULLET_EVENT, 500)
-        self.LOSE_EVENT = pygame.ENEMY_BULLET_EVENT + 1
-        self.WIN_EVENT = self.LOSE_EVENT + 1
 
     def run_game(self):
         """Here's the loop that contains the functions that runs every frame of our game."""
@@ -50,6 +55,7 @@ class NotSpaceInvaders:
         self.screen.fill(self.settings.background_color)
         self.ship.blitme()
         self.armada.blitme()
+        self.message.blitme()
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
         # Make the most-recently-drawn scene visible (Draw frame to screen)
@@ -89,6 +95,15 @@ class NotSpaceInvaders:
             if event.type == self.ENEMY_BULLET_EVENT:
                 self._fire_enemy_bullet(Alien)
 
+            if event.type == self.LEVEL_EVENT:
+                if event.outcome == 'win':
+                    self._display_message("you win! condradjulashuns!")
+                if event.outcome == 'lose':
+                    self._display_message("you suck bruh")
+            
+            if event.type == self.MESSAGE_TIMEOUT_EVENT:
+                self.message.text = ""
+
     def _check_keydown_events(self, event, keybinding):
         if event.type == pygame.KEYDOWN:
             key_events = [event.key == key for key in keybinding.keys]
@@ -112,12 +127,16 @@ class NotSpaceInvaders:
         self.cheese_sound.play()
 
     def _fire_enemy_bullet(self, alien):
-        random_index = random.randint(0, len(self.armada.aliens) - 1)
-        _, alien = list(self.armada.aliens.items())[random_index]
-        new_bullet = EnemyBullet(self, alien)
-        self.bullets.add(new_bullet)
-        self.dogbark.stop()
-        self.dogbark.play()
+        try:
+            random_index = random.randint(0, len(self.armada.aliens) - 1)
+        except(ValueError):
+            pygame.time.set_timer(self.ENEMY_BULLET_EVENT, 0)
+        else:
+            _, alien = list(self.armada.aliens.items())[random_index]
+            new_bullet = EnemyBullet(self, alien)
+            self.bullets.add(new_bullet)
+            self.dogbark.stop()
+            self.dogbark.play()
 
     def _check_hitboxes(self):
         for bullet in self.bullets.sprites():
@@ -130,7 +149,10 @@ class NotSpaceInvaders:
                 collision = bullet.rect.colliderect(self.ship.rect)
                 if collision:
                     self.ship.lives -= 1
-                    .
+                    bullet.kill()
+    def _display_message(self, message, seconds=3):
+        self.message.text = message
+        pygame.time.set_timer(self.MESSAGE_TIMEOUT_EVENT, seconds * 1000, 1)
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
