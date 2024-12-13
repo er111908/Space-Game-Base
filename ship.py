@@ -30,6 +30,7 @@ class Ship:
             if self.lives < 1:
                 self.lives = 5
                 self.just_died = True
+                pygame.event.post(self.game.LOSE_EVENT)
 
     def blitme(self):
         """Draw the ship at the current location"""

@@ -22,4 +22,4 @@ class Settings:
         self.bullet_color = (150, 150, 150)
 
         # Ship Settings
-        self.ship_speed = 2
+        self.ship_speed = 10

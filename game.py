@@ -33,12 +33,21 @@ class NotSpaceInvaders:
         self.WIN_EVENT = pygame.event.Event(self.LEVEL_EVENT, {'outcome': 'win'})
         self.LOSE_EVENT = pygame.event.Event(self.LEVEL_EVENT, {'outcome': 'lose'})
         self.MESSAGE_TIMEOUT_EVENT = pygame.USEREVENT + 4
+        self.WARMUP_EVENT = pygame.USEREVENT + 5
+        self.COUNTER_EVENT = pygame.USEREVENT + 6
         #
         self.cheese_sound = pygame.mixer.Sound("assets/catbark.mp3")
         self.background_music = pygame.mixer.Sound("assets/csgo.mp3")
         self.dogbark = pygame.mixer.Sound("assets/dogbark.mp3")
         self.background_music.play()
         pygame.time.set_timer(self.ENEMY_BULLET_EVENT, 500)
+
+        self.disable_input()
+        self.disable_enemy_fire()
+        self._display_message("its about sending a message", 1)
+        self.countdown = 5
+        pygame.time.set_timer(self.WARMUP_EVENT, self.countdown * 1000, 1)
+        pygame.time.set_timer(self.COUNTER_EVENT, 1000)
 
     def run_game(self):
         """Here's the loop that contains the functions that runs every frame of our game."""
@@ -97,12 +106,25 @@ class NotSpaceInvaders:
 
             if event.type == self.LEVEL_EVENT:
                 if event.outcome == 'win':
-                    self._display_message("you win! condradjulashuns!")
+                    self._display_message("you win! condradjulashuns!", 5)
                 if event.outcome == 'lose':
-                    self._display_message("you suck bruh")
+                    self._display_message("you suck bruh", 5)
+                    self.disable_input()
             
             if event.type == self.MESSAGE_TIMEOUT_EVENT:
                 self.message.text = ""
+
+            if event.type == self.WARMUP_EVENT:
+                self.enable_input()
+                self.enable_enemy_fire()
+
+            if event.type == self.COUNTER_EVENT:
+                if self.countdown > 0:
+                    self._display_message(str(self.countdown))
+                    self.countdown -= 1
+                else:
+                    self._display_message("its about sending a second, more elaborate message")
+                    pygame.time.set_timer(self.COUNTER_EVENT, 0)
 
     def _check_keydown_events(self, event, keybinding):
         if event.type == pygame.KEYDOWN:
@@ -153,6 +175,19 @@ class NotSpaceInvaders:
     def _display_message(self, message, seconds=3):
         self.message.text = message
         pygame.time.set_timer(self.MESSAGE_TIMEOUT_EVENT, seconds * 1000, 1)
+    
+    def disable_input(self):
+        pygame.event.set_blocked((pygame.KEYUP, pygame.KEYUP))
+        pygame.time.set_timer(self.BULLET_EVENT, 0)
+
+    def enable_input(self):
+        pygame.event.set_allowed((pygame.KEYUP, pygame.KEYDOWN))
+
+    def disable_enemy_fire(self):
+        pygame.event.set_blocked((self.ENEMY_BULLET_EVENT))
+
+    def enable_enemy_fire(self):
+        pygame.event.set_allowed((self.ENEMY_BULLET_EVENT))
 
 if __name__ == '__main__':
     # Instantiate the main app class and run the game.
